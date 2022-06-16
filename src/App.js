@@ -1,11 +1,18 @@
-import React from "react";
+import React, { Component } from 'react'
+import Produtos from './components/Produtos/Produtos'
 import "./App.css";
-import styled from "styled-components";
-import Produtos from "./components/Produtos";
 
-function App() {
-  return (
-    <div className="div-container">
+export default class App extends Component {
+
+    state = {
+      carrinho:[]
+    }
+
+  render() {
+
+    return (
+
+      <div className="div-container">
       <header>Eu sou header</header>
 
       <main>
@@ -38,60 +45,9 @@ function App() {
           </div>
 
           <div className="div-produtos">
-            <Produtos
-              imagem={"https://picsum.photos/id/237/200/300"}
-              texto={"produto1"}
-              nomeProduto={"Produto1"}
-              precoProduto={300.0}
-            />
-            <Produtos
-              imagem={"https://picsum.photos/id/237/200/300"}
-              texto={"produto1"}
-              nomeProduto={"Produto1"}
-              precoProduto={300.0}
-            />
-            <Produtos
-              imagem={"https://picsum.photos/id/237/200/300"}
-              texto={"produto1"}
-              nomeProduto={"Produto1"}
-              precoProduto={300.0}
-            />
-            <Produtos
-              imagem={"https://picsum.photos/id/237/200/300"}
-              texto={"produto1"}
-              nomeProduto={"Produto1"}
-              precoProduto={300.0}
-            />
-            <Produtos
-              imagem={"https://picsum.photos/id/237/200/300"}
-              texto={"produto1"}
-              nomeProduto={"Produto1"}
-              precoProduto={300.0}
-            />
-            <Produtos
-              imagem={"https://picsum.photos/id/237/200/300"}
-              texto={"produto1"}
-              nomeProduto={"Produto1"}
-              precoProduto={300.0}
-            />
-            <Produtos
-              imagem={"https://picsum.photos/id/237/200/300"}
-              texto={"produto1"}
-              nomeProduto={"Produto1"}
-              precoProduto={300.0}
-            />
-            <Produtos
-              imagem={"https://picsum.photos/id/237/200/300"}
-              texto={"produto1"}
-              nomeProduto={"Produto1"}
-              precoProduto={300.0}
-            />
-            <Produtos
-              imagem={"https://picsum.photos/id/237/200/300"}
-              texto={"produto1"}
-              nomeProduto={"Produto1"}
-              precoProduto={300.0}
-            />
+
+            <Produtos/>
+           
           </div>
         </section>
 
@@ -105,7 +61,8 @@ function App() {
 
       <footer>Eu sou o footer</footer>
     </div>
-  );
+    )
+  }
 }
 
-export default App;
+
