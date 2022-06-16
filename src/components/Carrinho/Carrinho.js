@@ -2,25 +2,25 @@
 
 
 
+
 // export default class Carrinho extends Component {
 
 //     state = {
 
 //         arrayProdutos:[{
-//           id: Date.now(),
+//           id: '',
 //           nome: '',
 //           valor: '',
 //         }]
     
 //       }
+
+//       retornaProdutosCarrinho = () =>{
+        
+//       }
       
 //       render() {
-          
-//         const arrayProdutos = [{
-//             id:
-//             nome:
-//             valor:
-//         }]
+
 
 //     return (
 

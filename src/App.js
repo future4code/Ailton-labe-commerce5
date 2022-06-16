@@ -1,16 +1,104 @@
 import React, { Component } from 'react'
-import Produtos from './components/Produtos/Produtos'
+// import Produtos from './components/Produtos/Produtos'
 import "./App.css";
+// import Carrinho from './components/Carrinho/Carrinho';
 
 export default class App extends Component {
 
     state = {
-      carrinho:[]
+
+      produtos:[
+        {
+         id: 1,
+        imagem:'https://picsum.photos/id/237/200/300',
+        nome: 'Nave espacial',
+        preco: 100,
+        },
+  
+        {
+          id: 2,
+          imagem:'https://picsum.photos/id/237/200/300',
+          nome: 'Estação Espacial',
+          preco: 200,
+        },
+  
+        {
+         id: 3,
+          imagem:'https://picsum.photos/id/237/200/300',
+          nome: 'Veiculo Exploração',
+          preco: 300,
+        },
+  
+  
+      ],
+    
+
+    carrinho:[],
+
+    inputValorMax:'',
+    inputValorMin:'',
+    inputBusca:'',
+    quantidade: 0,
     }
+
+
+
+  // FUNÇÃO DA CHAMADA DO BOTAO ADICIONAR, RESPONSAVEL POR ADICIONAR O PRODUTO NO ARRAY CARRINHO E ATUALIZAR VALOR
+
+    retornaProdutosCarrinho = (produtos) =>{
+      // console.log('botao funcionou', produtos.id)
+
+      
+      const adiciona = [ ...this.state.carrinho, produtos]
+      console.log(adiciona)
+      this.setState({carrinho: adiciona})
+
+      console.log(this.state.carrinho)
+
+    }
+
+    inputValorMaximo = (e) => {
+      this.setState({
+        inputValorMax: e.target.value
+      });
+    };
+  
+    inputValorMinimo = (e) => {
+      this.setState({
+        inputValorMin: e.target.value
+      });
+    };
+  
+    inputBuscaNome = (e) => {
+      this.setState({
+        inputBusca: e.target.value
+      });
+    };  
 
   render() {
 
+
+
+
+// RESPONSAVEL PELA RENDERIZAÇÃO NA PARTE DO CARRINHO
+
+const listaProdutosAdicionados = this.state.carrinho.map((produtos, index) => {
+  console.log("produtos", produtos)
+
+      return (
+        
+          <div key={index}>
+            <p> quantidade: {this.state.quantidade}  </p>
+            <p> {produtos.nome}</p>   
+          
+          <p>{produtos.preco}</p> 
+          </div>
+      );
+    });
+
     return (
+
+      
 
       <div className="div-container">
       <header>Eu sou header</header>
@@ -20,11 +108,11 @@ export default class App extends Component {
           <div>
             <h4>Filtros</h4>
             <p>Valor minimo</p>
-            <input type={"number"} min="0"></input>
+            <input type={"number"} min="0" onChange={this.inputValorMinimo} value={this.state.inputValorMin}></input>
             <p>Valor maximo</p>
-            <input type={"number"} min="0"></input>
+            <input type={"number"} min="0" onChange={this.inputValorMaximo} value={this.state.inputValorMax}></input>
             <p>Buscar por nome</p>
-            <input></input>
+            <input type={'text'} onChange={this.inputBuscaNome} value={this.state.inputBusca}></input>
           </div>
         </section>
 
@@ -46,15 +134,26 @@ export default class App extends Component {
 
           <div className="div-produtos">
 
-            <Produtos/>
+        {this.state.produtos.map((produtos) => {
+      return (
+        <div key={produtos.id}>
+          <img src={produtos.imagem}></img>
+          <p>{produtos.nome}</p>
+          <p>{produtos.preco}</p>
+          <button onClick={()=>this.retornaProdutosCarrinho(produtos)}>Adicionar</button>
+        </div>
+        )
+    })}
            
           </div>
         </section>
 
         <section className="sect-carrinho">
           <div>
-            <h4>Carrinho:</h4>
-            <p>Valor total: R$0,00</p>
+            {/* {this.state.carrinho[1]} {this.state.carrinho[2]} */}
+            {/* {this.state.carrinho} */}
+            {listaProdutosAdicionados}
+
           </div>
         </section>
       </main>
@@ -64,5 +163,3 @@ export default class App extends Component {
     )
   }
 }
-
-
