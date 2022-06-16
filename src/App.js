@@ -35,32 +35,75 @@ export default class App extends Component {
 
     carrinho:[],
 
-    inputValorMax:'',
+    inputValorMax: Infinity,
     inputValorMin:'',
     inputBusca:'',
-    quantidade: 0,
+    // quantidade: 1,
     }
 
 
 
   // FUNÇÃO DA CHAMADA DO BOTAO ADICIONAR, RESPONSAVEL POR ADICIONAR O PRODUTO NO ARRAY CARRINHO E ATUALIZAR VALOR
 
-    retornaProdutosCarrinho = (produtos) =>{
-      // console.log('botao funcionou', produtos.id)
+    retornaProdutosCarrinho = (id) =>{
+
+  //   const novoProduto = this.state.produtos.filter((item)=>{
+
+  //     return(item.id === id)
+      
+  //   })
+
+  //   if(this.state.carrinho.length === 0){
+
+  // const novoProdutoEquantidade = [{...novoProduto[0], 
+  //                                 quantidade: 1,}]
+
+  //   }else{
+
+  //     const arrayCarrinho = this.state.carrinho.map((dados)=>{
+
+  //       if(dados.quantidade === 0){
+  //         return(
+  //           this.state.carrinho
+  //         )
+  //       }
+  //     })
+
+
+  //   }
+
+  // console.log(novoProdutoEquantidade)                            
+  //  console.log(novoProduto)
+
+   }
+
 
       
-      const adiciona = [ ...this.state.carrinho, produtos]
-      console.log(adiciona)
-      this.setState({carrinho: adiciona})
+      // console.log('console adiciona ',produtos.id)
 
-      console.log(this.state.carrinho)
+      // if(produtos.id === ){
 
-    }
+      // }else()
+      // this.setState({carrinho: adiciona})
+
+      // console.log(this.state.carrinho)
+
+    // }
 
     inputValorMaximo = (e) => {
-      this.setState({
+
+      if(e.target.value !== ""){
+
+        this.setState({
         inputValorMax: e.target.value
       });
+
+      }else{
+        this.setState({
+          inputValorMax: Infinity
+        })
+      }
+
     };
   
     inputValorMinimo = (e) => {
@@ -88,7 +131,7 @@ const listaProdutosAdicionados = this.state.carrinho.map((produtos, index) => {
       return (
         
           <div key={index}>
-            <p> quantidade: {this.state.quantidade}  </p>
+            <p> quantidade: {produtos.quantidade}  </p>
             <p> {produtos.nome}</p>   
           
           <p>{produtos.preco}</p> 
@@ -96,9 +139,19 @@ const listaProdutosAdicionados = this.state.carrinho.map((produtos, index) => {
       );
     });
 
-    return (
 
-      
+  const filtragem = this.state.produtos.filter((dados) =>{
+    
+    if(dados.nome.toLowerCase().includes(this.state.inputBusca.toLowerCase()) && dados.preco >= this.state.inputValorMin && dados.preco <= this.state.inputValorMax){
+      return (dados)
+    }
+
+  }
+  ) 
+
+
+// console.log(filtragem)
+    return (
 
       <div className="div-container">
       <header>Eu sou header</header>
@@ -134,13 +187,13 @@ const listaProdutosAdicionados = this.state.carrinho.map((produtos, index) => {
 
           <div className="div-produtos">
 
-        {this.state.produtos.map((produtos) => {
+        {filtragem.map((produtos) => {
       return (
         <div key={produtos.id}>
           <img src={produtos.imagem}></img>
           <p>{produtos.nome}</p>
           <p>{produtos.preco}</p>
-          <button onClick={()=>this.retornaProdutosCarrinho(produtos)}>Adicionar</button>
+          <button onClick={()=>this.retornaProdutosCarrinho(produtos.id)}>Adicionar</button>
         </div>
         )
     })}
@@ -150,6 +203,7 @@ const listaProdutosAdicionados = this.state.carrinho.map((produtos, index) => {
 
         <section className="sect-carrinho">
           <div>
+            <p>carrinho</p>
             {/* {this.state.carrinho[1]} {this.state.carrinho[2]} */}
             {/* {this.state.carrinho} */}
             {listaProdutosAdicionados}
