@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Produtos from './components/Produtos/Produtos'
 import "./App.css";
+import Carrinho from './components/Carrinho/Carrinho';
 
 export default class App extends Component {
 
@@ -52,10 +53,7 @@ export default class App extends Component {
         </section>
 
         <section className="sect-carrinho">
-          <div>
-            <h4>Carrinho:</h4>
-            <p>Valor total: R$0,00</p>
-          </div>
+          <Carrinho/>
         </section>
       </main>
 

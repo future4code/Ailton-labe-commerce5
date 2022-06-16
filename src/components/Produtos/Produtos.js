@@ -41,7 +41,7 @@ export default class Produtos extends Component {
           <img src={produtos.imagem}></img>
           <p>{produtos.nome}</p>
           <p>{produtos.preco}</p>
-          <button onClick={this.retornaProdutosCarrinho}>Adicionar</button>
+          <button onClick={this.props.retornaProdutosCarrinho}>Adicionar</button>
         </div>
         )
     })
