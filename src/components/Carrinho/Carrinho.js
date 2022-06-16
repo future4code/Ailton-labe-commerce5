@@ -1,32 +1,32 @@
-import React, { Component } from 'react'
+// import React, { Component } from 'react'
 
 
 
 
-export default class Carrinho extends Component {
+// export default class Carrinho extends Component {
 
-    state = {
+//     state = {
 
-        arrayProdutos:[{
-          id: '',
-          nome: '',
-          valor: '',
-        }]
+//         arrayProdutos:[{
+//           id: '',
+//           nome: '',
+//           valor: '',
+//         }]
     
-      }
+//       }
 
-      retornaProdutosCarrinho = () =>{
+//       retornaProdutosCarrinho = () =>{
         
-      }
+//       }
       
-      render() {
+//       render() {
 
 
-    return (
+//     return (
 
 
-      <div>Carrinho</div>
+//       <div>Carrinho</div>
 
-    )
-  }
-}
+//     )
+//   }
+// }
