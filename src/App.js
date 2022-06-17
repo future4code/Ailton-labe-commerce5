@@ -280,7 +280,7 @@ export default class App extends Component {
                     
                     <p>{produtos.nome}</p>
 
-                    <p>{produtos.preco}</p>
+                    <p>R$ {produtos.preco},00</p>
 
                     <button
                       onClick={() => this.retornaProdutosCarrinho(produtos)}
