@@ -1,4 +1,4 @@
-Sejam bem vindos ao Labe-commerce, esse repositório contém um esqueleto de app React e um .gitignore.
+Sejam bem vindos ao Labe-commerce !
 
 Projeto Labe-commerce AstroBot Store,
 
@@ -12,4 +12,7 @@ Conta com ordenação crescente e decrescente.
 Com todos os itens separados por cards, podendo ser adicionados para o carrinho de compras através do botão adicionar.
 
 O carrinho devolve a lista e quantidade de itens adicionados junto com o valor final para pagamento dos produtos.
+
+LINK SURGE:
+https://mean-boats.surge.sh/
 
