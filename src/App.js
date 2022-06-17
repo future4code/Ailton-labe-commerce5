@@ -176,7 +176,7 @@ export default class App extends Component {
             <p>R${produtos.preco}</p>
 
             <button onClick={() => this.removeProdutoCarrinho(produtos)}>
-              Remover Produtos
+              Remover
             </button>
 
           </div>
@@ -206,7 +206,7 @@ export default class App extends Component {
 
         <header>
         <img src="https://img.icons8.com/external-tulpahn-outline-color-tulpahn/64/undefined/external-astronaut-space-tulpahn-outline-color-tulpahn-1.png" alt="icone"></img>
-        <h1>Nome da Loja</h1>
+        <h1>AstroBot Store</h1>
         </header>
 
         <main>
@@ -249,7 +249,7 @@ export default class App extends Component {
 
             <div className="div-filtragem">
               
-              <p>Eu sou a filtragem</p>
+            
 
               <div className="div-ordenacao">
 
@@ -260,9 +260,9 @@ export default class App extends Component {
                   name="ordenacao"
                   id="ordenacao"
                 >
-                  <option value="valor-crescente">Crescente</option>
+                  <option className="texto-crescente" value="valor-crescente">Crescente</option>
 
-                  <option value="valor-decrescente">Decrescente</option>
+                  <option className="texto-crescente" value="valor-decrescente">Decrescente</option>
 
                 </select>
 
