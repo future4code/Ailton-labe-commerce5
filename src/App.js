@@ -31,47 +31,58 @@ export default class App extends Component {
     carrinho: [],
 
     inputValorMax: Infinity,
-    inputValorMin: "",
-    inputBusca: "",
-    // quantidade: 1,
-    ordenacao: "valor-crescente",
-  };
+
+    inputValorMin:'',
+    inputBusca:'',
+    quantidade: 0,
+    }
+
+
 
   // FUNÇÃO DA CHAMADA DO BOTAO ADICIONAR, RESPONSAVEL POR ADICIONAR O PRODUTO NO ARRAY CARRINHO E ATUALIZAR VALOR
 
-  retornaProdutosCarrinho = (id) => {
-    //   const novoProduto = this.state.produtos.filter((item)=>{
-    //     return(item.id === id)
-    //   })
-    //   if(this.state.carrinho.length === 0){
-    // const novoProdutoEquantidade = [{...novoProduto[0],
-    //                                 quantidade: 1,}]
-    //   }else{
-    //     const arrayCarrinho = this.state.carrinho.map((dados)=>{
-    //       if(dados.quantidade === 0){
-    //         return(
-    //           this.state.carrinho
-    //         )
-    //       }
-    //     })
-    //   }
-    // console.log(novoProdutoEquantidade)
-    //  console.log(novoProduto)
-  };
+    retornaProdutosCarrinho = (produto) => {
+      console.log("funcionei")
+      const carrinho = this.state.carrinho
+      const productExists = carrinho.find((p) => p.id === produto.id);
+  
+      if (productExists) {
+        productExists.quantidade += 1;
+      } else {
+        produto.quantidade = 1;
+        carrinho.push(produto);
+      }
+  
+      this.setState({ carrinho });
+      
+    };
 
-  // console.log('console adiciona ',produtos.id)
+    removeProdutoCarrinho = (produto) => {
+      const { carrinho } = this.state;
+      const novoCarrinho = [...carrinho];
+      novoCarrinho.splice(novoCarrinho.indexOf(produto), 1);
+      this.setState({ carrinho: novoCarrinho });
+    };
 
-  // if(produtos.id === ){
 
-  // }else()
-  // this.setState({carrinho: adiciona})
+    inputValorMaximo = (e) => {
 
-  // console.log(this.state.carrinho)
+      if(e.target.value !== ""){
 
-  // }
+        this.setState({
+        inputValorMax: e.target.value
+      });
 
-  inputValorMaximo = (e) => {
-    if (e.target.value !== "") {
+      }else{
+        this.setState({
+          inputValorMax: Infinity
+        })
+      }
+
+    };
+  
+    inputValorMinimo = (e) => {
+
       this.setState({
         inputValorMax: e.target.value,
       });
@@ -122,10 +133,13 @@ export default class App extends Component {
 
         return (
           <div key={index}>
-            <p> quantidade: {produtos.quantidade} </p>
-            <p> {produtos.nome}</p>
 
-            <p>{produtos.preco}</p>
+            <p> quantidade: {produtos.quantidade}  </p>
+            <p> {produtos.nome}</p>   
+          
+          <p>{produtos.preco}</p> 
+          <button onClick={() => this.removeProdutoCarrinho(produtos)} >Remover Produtos</button>
+
           </div>
         );
       }
@@ -146,82 +160,67 @@ export default class App extends Component {
     // console.log(filtragem)
     return (
       <div className="div-container">
-        <header>Eu sou header</header>
 
-        <main>
-          <section className="sect-filtro">
-            <div>
-              <h4>Filtros</h4>
-              <p>Valor minimo</p>
-              <input
-                type={"number"}
-                min="0"
-                onChange={this.inputValorMinimo}
-                value={this.state.inputValorMin}
-              ></input>
-              <p>Valor maximo</p>
-              <input
-                type={"number"}
-                min="0"
-                onChange={this.inputValorMaximo}
-                value={this.state.inputValorMax}
-              ></input>
-              <p>Buscar por nome</p>
-              <input
-                type={"text"}
-                onChange={this.inputBuscaNome}
-                value={this.state.inputBusca}
-              ></input>
-            </div>
-          </section>
+      <header>Eu sou header</header>
 
-          <section className="sect-produtos">
-            <div className="div-filtragem">
-              <p>Eu sou a filtragem</p>
+      <main>
+        <section className="sect-filtro">
+          <div>
+            <h4>Filtros</h4>
+            <p>Valor minimo</p>
+            <input type={"number"} min="0" onChange={this.inputValorMinimo} value={this.state.inputValorMin}></input>
+            <p>Valor maximo</p>
+            <input type={"number"} min="0" onChange={this.inputValorMaximo} value={this.state.inputValorMax}></input>
+            <p>Buscar por nome</p>
+            <input type={'text'} onChange={this.inputBuscaNome} value={this.state.inputBusca}></input>
+          </div>
+        </section>
 
-              <div className="div-ordenacao">
-                <p>Ordenação:</p>
-                <select
-                  onChange={this.mudancaOrdenacao}
-                  name="ordenacao"
-                  id="ordenacao"
-                >
-                  <option value="valor-crescente">Crescente</option>
-                  <option value="valor-decrescente">Decrescente</option>
-                </select>
-              </div>
-            </div>
+        <section className="sect-produtos">
+          <div className="div-filtragem">
+            <p>Eu sou a filtragem</p>
 
-            <div className="div-produtos">
-              {filtragem.map((produtos) => {
-                return (
-                  <div key={produtos.id}>
-                    <img src={produtos.imagem}></img>
-                    <p>{produtos.nome}</p>
-                    <p>{produtos.preco}</p>
-                    <button
-                      onClick={() => this.retornaProdutosCarrinho(produtos.id)}
-                    >
-                      Adicionar
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
+          <div className="div-ordenacao">
 
-          <section className="sect-carrinho">
-            <div>
-              <p>carrinho</p>
-              {/* {this.state.carrinho[1]} {this.state.carrinho[2]} */}
-              {/* {this.state.carrinho} */}
-              {listaProdutosAdicionados}
-            </div>
-          </section>
-        </main>
+            <p>Ordenação:</p>
+            <select name="ordenacao" id="ordenacao">
+              <option value="valor-crescente">Crescente</option>
+              <option value="valor-decrescente">Decrescete</option>
 
-        <footer>Eu sou o footer</footer>
-      </div>
-    );
+            </select>
+
+          </div>
+          </div>
+
+          <div className="div-produtos">
+
+        {filtragem.map((produtos) => {
+      return (
+        <div key={produtos.id}>
+          <img src={produtos.imagem}></img>
+          <p>{produtos.nome}</p>
+          <p>{produtos.preco}</p>
+          <button onClick={()=>this.retornaProdutosCarrinho(produtos)}>Adicionar</button>
+        </div>
+        )
+    })}
+           
+          </div>
+        </section>
+
+        <section className="sect-carrinho">
+          <div>
+            <p>carrinho</p>
+            {/* {this.state.carrinho[1]} {this.state.carrinho[2]} */}
+            {/* {this.state.carrinho} */}
+            {listaProdutosAdicionados} 
+
+          </div>
+        </section>
+      </main>
+
+      <footer>Eu sou o footer</footer>
+    </div>
+    )
   }
 }
