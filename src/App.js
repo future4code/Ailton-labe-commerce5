@@ -1,41 +1,37 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 // import Produtos from './components/Produtos/Produtos'
 import "./App.css";
 // import Carrinho from './components/Carrinho/Carrinho';
 
 export default class App extends Component {
-
-    state = {
-
-      produtos:[
-        {
-         id: 1,
-        imagem:'https://picsum.photos/id/237/200/300',
-        nome: 'Nave espacial',
+  state = {
+    produtos: [
+      {
+        id: 1,
+        imagem: "https://picsum.photos/id/237/200/300",
+        nome: "Nave espacial",
         preco: 100,
-        },
-  
-        {
-          id: 2,
-          imagem:'https://picsum.photos/id/237/200/300',
-          nome: 'Estação Espacial',
-          preco: 200,
-        },
-  
-        {
-         id: 3,
-          imagem:'https://picsum.photos/id/237/200/300',
-          nome: 'Veiculo Exploração',
-          preco: 300,
-        },
-  
-  
-      ],
-    
+      },
 
-    carrinho:[],
+      {
+        id: 2,
+        imagem: "https://picsum.photos/id/237/200/300",
+        nome: "Estação Espacial",
+        preco: 200,
+      },
+
+      {
+        id: 3,
+        imagem: "https://picsum.photos/id/237/200/300",
+        nome: "Veiculo Exploração",
+        preco: 300,
+      },
+    ],
+
+    carrinho: [],
 
     inputValorMax: Infinity,
+
     inputValorMin:'',
     inputBusca:'',
     quantidade: 0,
@@ -86,54 +82,85 @@ export default class App extends Component {
     };
   
     inputValorMinimo = (e) => {
+
       this.setState({
-        inputValorMin: e.target.value
+        inputValorMax: e.target.value,
       });
-    };
-  
-    inputBuscaNome = (e) => {
+    } else {
       this.setState({
-        inputBusca: e.target.value
+        inputValorMax: Infinity,
       });
-    };  
+    }
+  };
+
+  inputValorMinimo = (e) => {
+    this.setState({
+      inputValorMin: e.target.value,
+    });
+  };
+
+  inputBuscaNome = (e) => {
+    this.setState({
+      inputBusca: e.target.value,
+    });
+  };
+
+  mudancaOrdenacao = (e) => {
+    this.setState({ ordenacao: e.target.value });
+    this.state.ordenacao === "valor-crescente"
+      ? this.ordenacaoCres()
+      : this.ordenacaoDesc();
+  };
+
+  ordenacaoCres() {
+    this.setState((prevState) => {
+      this.state.produtos.sort((a, b) => b.preco - a.preco);
+    });
+  }
+
+  ordenacaoDesc() {
+    this.setState((prevState) => {
+      this.state.produtos.sort((a, b) => a.preco - b.preco);
+    });
+  }
 
   render() {
+    // RESPONSAVEL PELA RENDERIZAÇÃO NA PARTE DO CARRINHO
 
+    const listaProdutosAdicionados = this.state.carrinho.map(
+      (produtos, index) => {
+        console.log("produtos", produtos);
 
-
-
-// RESPONSAVEL PELA RENDERIZAÇÃO NA PARTE DO CARRINHO
-
-const listaProdutosAdicionados = this.state.carrinho.map((produtos, index) => {
-  console.log("produtos", produtos)
-
-      return (
-        
+        return (
           <div key={index}>
+
             <p> quantidade: {produtos.quantidade}  </p>
             <p> {produtos.nome}</p>   
           
           <p>{produtos.preco}</p> 
           <button onClick={() => this.removeProdutoCarrinho(produtos)} >Remover Produtos</button>
+
           </div>
-      );
+        );
+      }
+    );
+
+    const filtragem = this.state.produtos.filter((dados) => {
+      if (
+        dados.nome
+          .toLowerCase()
+          .includes(this.state.inputBusca.toLowerCase()) &&
+        dados.preco >= this.state.inputValorMin &&
+        dados.preco <= this.state.inputValorMax
+      ) {
+        return dados;
+      }
     });
 
-
-  const filtragem = this.state.produtos.filter((dados) =>{
-    
-    if(dados.nome.toLowerCase().includes(this.state.inputBusca.toLowerCase()) && dados.preco >= this.state.inputValorMin && dados.preco <= this.state.inputValorMax){
-      return (dados)
-    }
-
-  }
-  ) 
-
-
-// console.log(filtragem)
+    // console.log(filtragem)
     return (
-
       <div className="div-container">
+
       <header>Eu sou header</header>
 
       <main>
