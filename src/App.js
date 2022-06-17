@@ -43,7 +43,6 @@ export default class App extends Component {
   // FUNÇÃO DA CHAMADA DO BOTAO ADICIONAR, RESPONSAVEL POR ADICIONAR O PRODUTO NO ARRAY CARRINHO E ATUALIZAR VALOR
 
     retornaProdutosCarrinho = (produto) => {
-      console.log("funcionei")
       const carrinho = this.state.carrinho
       const productExists = carrinho.find((p) => p.id === produto.id);
   
@@ -58,12 +57,31 @@ export default class App extends Component {
       
     };
 
-    removeProdutoCarrinho = (produto) => {
-      const { carrinho } = this.state;
-      const novoCarrinho = [...carrinho];
-      novoCarrinho.splice(novoCarrinho.indexOf(produto), 1);
-      this.setState({ carrinho: novoCarrinho });
-    };
+    removeProdutoCarrinho = (produtos) => {
+
+      // console.log('id do produto carrinho', produtos.id)
+      
+    const mapeamentoCarrinho = this.state.carrinho.filter((carrinhoID) => {
+
+    const carrinho1 = this.state.carrinho
+      
+        if(produtos.id === carrinhoID.id){
+  
+          return(
+            // console.log(produtos.quantidade,'funcionei', this.state.carrinho),
+            produtos.quantidade = (produtos.quantidade - 1),
+            this.setState(carrinho1)
+            
+            )    
+          }
+          // if(produtos.quantidade === 0){
+          //   console.log('chegou a 0')
+
+          // }
+        
+      })
+
+    }
 
 
     inputValorMaximo = (e) => {
@@ -125,7 +143,6 @@ export default class App extends Component {
 
     const listaProdutosAdicionados = this.state.carrinho.map(
       (produtos, index) => {
-        console.log("produtos", produtos);
 
         return (
           <div key={index}>
@@ -153,7 +170,6 @@ export default class App extends Component {
       }
     });
 
-    // console.log(filtragem)
     return (
       <div className="div-container">
 
@@ -210,8 +226,6 @@ export default class App extends Component {
         <section className="sect-carrinho">
           <div>
             <p>carrinho</p>
-            {/* {this.state.carrinho[1]} {this.state.carrinho[2]} */}
-            {/* {this.state.carrinho} */}
             {listaProdutosAdicionados} 
 
           </div>
