@@ -35,6 +35,7 @@ export default class App extends Component {
     inputValorMin:'',
     inputBusca:'',
     quantidade: 0,
+    ordenacao:'valor-crescente'
     }
 
 
@@ -71,27 +72,22 @@ export default class App extends Component {
 
         this.setState({
         inputValorMax: e.target.value
-      });
-
-      }else{
+      });}
+      
+      else{
         this.setState({
           inputValorMax: Infinity
         })
-      }
-
-    };
+      }}
   
     inputValorMinimo = (e) => {
 
       this.setState({
-        inputValorMax: e.target.value,
+        inputValorMin: e.target.value,
       });
-    } else {
-      this.setState({
-        inputValorMax: Infinity,
-      });
+  
+
     }
-  };
 
   inputValorMinimo = (e) => {
     this.setState({
@@ -183,11 +179,14 @@ export default class App extends Component {
           <div className="div-ordenacao">
 
             <p>Ordenação:</p>
-            <select name="ordenacao" id="ordenacao">
-              <option value="valor-crescente">Crescente</option>
-              <option value="valor-decrescente">Decrescete</option>
-
-            </select>
+            <select
+                  onChange={this.mudancaOrdenacao}
+                  name="ordenacao"
+                  id="ordenacao"
+                >
+                  <option value="valor-crescente">Crescente</option>
+                  <option value="valor-decrescente">Decrescente</option>
+                </select>
 
           </div>
           </div>
