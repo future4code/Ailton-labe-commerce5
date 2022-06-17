@@ -38,57 +38,36 @@ export default class App extends Component {
     inputValorMax: Infinity,
     inputValorMin:'',
     inputBusca:'',
-    // quantidade: 1,
+    quantidade: 0,
     }
 
 
 
   // FUNÇÃO DA CHAMADA DO BOTAO ADICIONAR, RESPONSAVEL POR ADICIONAR O PRODUTO NO ARRAY CARRINHO E ATUALIZAR VALOR
 
-    retornaProdutosCarrinho = (id) =>{
-
-  //   const novoProduto = this.state.produtos.filter((item)=>{
-
-  //     return(item.id === id)
+    retornaProdutosCarrinho = (produto) => {
+      console.log("funcionei")
+      const carrinho = this.state.carrinho
+      const productExists = carrinho.find((p) => p.id === produto.id);
+  
+      if (productExists) {
+        productExists.quantidade += 1;
+      } else {
+        produto.quantidade = 1;
+        carrinho.push(produto);
+      }
+  
+      this.setState({ carrinho });
       
-  //   })
+    };
 
-  //   if(this.state.carrinho.length === 0){
+    removeProdutoCarrinho = (produto) => {
+      const { carrinho } = this.state;
+      const novoCarrinho = [...carrinho];
+      novoCarrinho.splice(novoCarrinho.indexOf(produto), 1);
+      this.setState({ carrinho: novoCarrinho });
+    };
 
-  // const novoProdutoEquantidade = [{...novoProduto[0], 
-  //                                 quantidade: 1,}]
-
-  //   }else{
-
-  //     const arrayCarrinho = this.state.carrinho.map((dados)=>{
-
-  //       if(dados.quantidade === 0){
-  //         return(
-  //           this.state.carrinho
-  //         )
-  //       }
-  //     })
-
-
-  //   }
-
-  // console.log(novoProdutoEquantidade)                            
-  //  console.log(novoProduto)
-
-   }
-
-
-      
-      // console.log('console adiciona ',produtos.id)
-
-      // if(produtos.id === ){
-
-      // }else()
-      // this.setState({carrinho: adiciona})
-
-      // console.log(this.state.carrinho)
-
-    // }
 
     inputValorMaximo = (e) => {
 
@@ -135,6 +114,7 @@ const listaProdutosAdicionados = this.state.carrinho.map((produtos, index) => {
             <p> {produtos.nome}</p>   
           
           <p>{produtos.preco}</p> 
+          <button onClick={() => this.removeProdutoCarrinho(produtos)} >Remover Produtos</button>
           </div>
       );
     });
@@ -193,7 +173,7 @@ const listaProdutosAdicionados = this.state.carrinho.map((produtos, index) => {
           <img src={produtos.imagem}></img>
           <p>{produtos.nome}</p>
           <p>{produtos.preco}</p>
-          <button onClick={()=>this.retornaProdutosCarrinho(produtos.id)}>Adicionar</button>
+          <button onClick={()=>this.retornaProdutosCarrinho(produtos)}>Adicionar</button>
         </div>
         )
     })}
@@ -206,7 +186,7 @@ const listaProdutosAdicionados = this.state.carrinho.map((produtos, index) => {
             <p>carrinho</p>
             {/* {this.state.carrinho[1]} {this.state.carrinho[2]} */}
             {/* {this.state.carrinho} */}
-            {listaProdutosAdicionados}
+            {listaProdutosAdicionados} 
 
           </div>
         </section>
